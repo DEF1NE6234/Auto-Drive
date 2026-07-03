@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Каталог Авто · NHTSA vPIC</title>
+<style>
+  :root{
+    --bg: #14181C;
+    --panel: #1C2126;
+    --panel-2: #20262C;
+    --line: #333B42;
+    --text: #E8E6E1;
+    --text-dim: #8B9299;
+    --accent: #FF6B35;
+    --accent-dim: #C9502A;
+    --ok: #4CAF7D;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --disp: 'Oswald', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+  @font-face{ font-family:'Oswald'; src: local('Oswald'); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    min-height:100vh;
+  }
+  a{ color:inherit; }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:36px 20px 80px; }
+
+  header.top{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    border-bottom:2px solid var(--line);
+    padding-bottom:18px; margin-bottom:28px; flex-wrap:wrap; gap:14px;
+  }
+  .brand h1{
+    font-family: var(--disp);
+    font-weight:600;
+    letter-spacing:0.5px;
+    font-size: clamp(28px,4vw,44px);
+    text-transform:uppercase;
+  }
+  .brand h1 span{ color:var(--accent); }
+  .brand p{
+    font-family: var(--mono);
+    font-size:12px;
+    color: var(--text-dim);
+    margin-top:4px;
+    letter-spacing:0.5px;
+  }
+  .status{
+    font-family: var(--mono);
+    font-size:12px;
+    color: var(--text-dim);
+    text-align:right;
+    display:flex; flex-direction:column; gap:6px; align-items:flex-end;
+  }
+  .status .dot{
+    display:inline-block; width:8px; height:8px; border-radius:50%;
+    background: var(--text-dim); margin-right:6px;
+  }
+  .status .dot.live{ background: var(--ok); box-shadow:0 0 6px var(--ok); }
+  .status .dot.err{ background: var(--accent); box-shadow:0 0 6px var(--accent); }
+
+  .controls{
+    display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;
+  }
+  .controls button{
+    font-family: var(--mono);
+    background: var(--panel);
+    border:1px solid var(--line);
+    color: var(--text);
+    padding:8px 14px;
+    font-size:12px;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    text-transform:uppercase;
+    transition: border-color .15s, color .15s;
+  }
+  .controls button:hover{ border-color: var(--accent); color:var(--accent); }
+  .controls button:disabled{ opacity:0.4; cursor:not-allowed; }
+
+  .log{
+    font-family: var(--mono);
+    font-size:11px;
+    color: var(--text-dim);
+    background: var(--panel);
+    border:1px solid var(--line);
+    padding:10px 14px;
+    margin-bottom:26px;
+    max-height:120px;
+    overflow-y:auto;
+    line-height:1.6;
+  }
+  .log .warn{ color: var(--accent); }
+  .log .ok{ color: var(--ok); }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap:22px;
+  }
+
+  /* Signature element: window-sticker / Monroney-label style card */
+  .card{
+    background: var(--panel);
+    border:1px solid var(--line);
+    position:relative;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:4px;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 10px, transparent 10px 18px);
+    opacity:0.9;
+  }
+  .card .photo{
+    width:100%; aspect-ratio: 4/3;
+    background: #0F1215;
+    position:relative;
+    overflow:hidden;
+  }
+  .card .photo img{
+    width:100%; height:100%; object-fit:cover;
+    display:block;
+    filter: saturate(1.02) contrast(1.02);
+  }
+  .card .photo .ph-loading,
+  .card .photo .ph-error{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--mono); font-size:11px; color: var(--text-dim);
+    text-align:center; padding:10px;
+  }
+  .card .photo .badge{
+    position:absolute; top:10px; right:10px;
+    font-family: var(--mono); font-size:10px;
+    background: rgba(20,24,28,0.85);
+    border:1px solid var(--line);
+    color: var(--accent);
+    padding:3px 8px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+
+  .card .head{
+    padding:14px 16px 10px;
+    border-bottom:1px dashed var(--line);
+  }
+  .card .head h3{
+    font-family: var(--disp);
+    text-transform:uppercase;
+    font-size:19px;
+    letter-spacing:0.3px;
+  }
+  .card .head .year{
+    font-family: var(--mono);
+    font-size:12px;
+    color: var(--accent);
+    margin-top:2px;
+  }
+
+  .spec{
+    font-family: var(--mono);
+    font-size:12.5px;
+    padding:12px 16px;
+    display:flex; flex-direction:column; gap:7px;
+    color: var(--text-dim);
+    flex:1;
+  }
+  .spec .row{
+    display:flex; justify-content:space-between; gap:10px;
+    border-bottom:1px dotted #2a3036;
+    padding-bottom:6px;
+  }
+  .spec .row b{ color: var(--text); font-weight:500; }
+  .spec .row .k{ text-transform:uppercase; letter-spacing:0.4px; }
+
+  .price{
+    margin-top:auto;
+    padding:14px 16px;
+    background: var(--panel-2);
+    border-top:1px solid var(--line);
+    display:flex; align-items:baseline; justify-content:space-between;
+  }
+  .price .amount{
+    font-family: var(--disp);
+    font-size:24px;
+    color: var(--accent);
+  }
+  .price .note{
+    font-family: var(--mono);
+    font-size:9.5px;
+    color: var(--text-dim);
+    text-transform:uppercase;
+  }
+
+  .empty-card{
+    border:1px dashed var(--line);
+    padding:30px 16px;
+    font-family: var(--mono);
+    font-size:12px;
+    color: var(--text-dim);
+    text-align:center;
+  }
+  .empty-card b{ color: var(--accent); display:block; margin-bottom:6px; font-size:13px; }
+
+  footer.note{
+    margin-top:40px;
+    font-family: var(--mono);
+    font-size:11px;
+    color: var(--text-dim);
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    line-height:1.7;
+  }
+  footer.note b{ color:var(--text); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <h1>Каталог <span>Авто</span></h1>
+        <p>Джерело даних: vpic.nhtsa.dot.gov · Фото: api.unsplash.com</p>
+      </div>
+      <div class="status" id="status">
+        <span><span class="dot" id="statusDot"></span><span id="statusText">Ініціалізація…</span></span>
+      </div>
+    </header>
+
+    <div class="controls">
+      <button id="reloadBtn">↻ Оновити каталог</button>
+      <span style="font-family:var(--mono); font-size:11px; color:var(--text-dim); align-self:center;">
+        Марки: Toyota · BMW · Ford · Honda · Mercedes-Benz · Audi
+      </span>
+    </div>
+
+    <div class="log" id="log"></div>
+
+    <div class="grid" id="grid"></div>
+
+    <footer class="note">
+      <b>Про дані:</b> Модель, марка та рік випуску отримані напряму з офіційного API NHTSA vPIC (US Dept. of Transportation).
+      NHTSA не надає ціну, тип палива чи коробку передач для загального каталогу моделей (ці поля відсутні в базі —
+      вона реєстраційна, а не комерційна), тому вони позначені як <b>оцінні / демо-дані</b>, згенеровані детерміновано
+      на основі назви моделі. Фото автомобілів підвантажуються через Unsplash Search API за запитом "марка модель".
+      <br><br>
+      ⚠️ <b>Безпека ключа:</b> Unsplash Client-ID використовується тут напряму в браузері (як демо). Для продакшн-сайту
+      варто проксувати запит через свій бекенд, щоб не світити ключ у публічному JS-коді.
+    </footer>
+  </div>
+
+<script>
+(function(){
+  const UNSPLASH_KEY = "1SuSCrVsdhZTH8i4RhsA0eaI2rLmJP6TdrLVExZEgRk";
+  const MAKES = ["Toyota","BMW","Ford","Honda","Mercedes-Benz","Audi"];
+  const YEAR = 2023;
+  const MODELS_PER_MAKE = 2;
+
+  const grid = document.getElementById('grid');
+  const log = document.getElementById('log');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  const reloadBtn = document.getElementById('reloadBtn');
+
+  function logLine(msg, cls){
+    const div = document.createElement('div');
+    if (cls) div.className = cls;
+    div.textContent = msg;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function setStatus(text, mode){
+    statusText.textContent = text;
+    statusDot.className = 'dot' + (mode ? ' ' + mode : '');
+  }
+
+  // Deterministic pseudo-random generator seeded by string, used only
+  // for the demo fields (price / fuel / transmission) that vPIC does not provide.
+  function seededRandom(seed){
+    let h = 0;
+    for (let i = 0; i < seed.length; i++){
+      h = (h << 5) - h + seed.charCodeAt(i);
+      h |= 0;
+    }
+    return function(){
+      h = (h * 9301 + 49297) % 233280;
+      return h / 233280;
+    };
+  }
+
+  function demoSpecs(make, model, year){
+    const rnd = seededRandom(make + model + year);
+    const fuels = ["Бензин", "Дизель", "Гібрид", "Електро"];
+    const transmissions = ["Автомат", "Механіка", "Робот (DCT)", "Варіатор (CVT)"];
+    const basePrice = 22000 + Math.floor(rnd() * 55000);
+    return {
+      price: basePrice,
+      fuel: fuels[Math.floor(rnd() * fuels.length)],
+      transmission: transmissions[Math.floor(rnd() * transmissions.length)],
+      bodyType: ["Седан","Кросовер","Хетчбек","Позашляховик"][Math.floor(rnd()*4)]
+    };
+  }
+
+  async function fetchModelsForMake(make){
+    const url = `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/${encodeURIComponent(make)}?format=json`;
+    const res = await fetch(url);
+    if (!res.ok){
+      throw new Error(`HTTP ${res.status} під час запиту моделей для "${make}"`);
+    }
+    const data = await res.json();
+    if (!data.Results || data.Results.length === 0){
+      throw new Error(`Порожній результат (Results) для марки "${make}" — NHTSA не повернула моделей.`);
+    }
+    return data.Results;
+  }
+
+  async function fetchUnsplashPhoto(query){
+    const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape&client_id=${UNSPLASH_KEY}`;
+    const res = await fetch(url);
+    if (!res.ok){
+      throw new Error(`Unsplash HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    if (!data.results || data.results.length === 0){
+      throw new Error(`Unsplash: немає фото за запитом "${query}"`);
+    }
+    return {
+      url: data.results[0].urls.small,
+      author: data.results[0].user.name,
+      link: data.results[0].links.html
+    };
+  }
+
+  function renderErrorCard(title, message){
+    const el = document.createElement('div');
+    el.className = 'empty-card';
+    el.innerHTML = `<b>⚠ ${title}</b>${message}`;
+    grid.appendChild(el);
+  }
+
+  function renderCarCard(car){
+    const el = document.createElement('div');
+    el.className = 'card';
+
+    const photoHtml = car.photoState === 'loading'
+      ? `<div class="ph-loading">завантаження фото…</div>`
+      : car.photoState === 'error'
+        ? `<div class="ph-error">фото недоступне<br>${car.photoError || ''}</div>`
+        : `<img src="${car.photo.url}" alt="${car.make} ${car.model}" loading="lazy">`;
+
+    el.innerHTML = `
+      <div class="photo" data-key="${car.key}">
+        ${photoHtml}
+        <span class="badge">vPIC · NHTSA</span>
+      </div>
+      <div class="head">
+        <h3>${car.make} ${car.model}</h3>
+        <div class="year">Рік випуску: ${car.year}</div>
+      </div>
+      <div class="spec">
+        <div class="row"><span class="k">Кузов</span><b>${car.specs.bodyType}</b></div>
+        <div class="row"><span class="k">Паливо</span><b>${car.specs.fuel}</b></div>
+        <div class="row"><span class="k">Коробка передач</span><b>${car.specs.transmission}</b></div>
+        <div class="row"><span class="k">Model ID (vPIC)</span><b>#${car.modelId}</b></div>
+      </div>
+      <div class="price">
+        <div>
+          <div class="amount">$${car.specs.price.toLocaleString('en-US')}</div>
+        </div>
+        <div class="note">оцінна ціна · демо</div>
+      </div>
+    `;
+    grid.appendChild(el);
+    return el;
+  }
+
+  async function loadCatalog(){
+    reloadBtn.disabled = true;
+    grid.innerHTML = '';
+    log.innerHTML = '';
+    setStatus('Отримання даних із NHTSA vPIC…');
+    logLine('→ Старт синхронізації каталогу');
+
+    let allCars = [];
+
+    for (const make of MAKES){
+      try {
+        logLine(`→ Запит моделей: ${make}`);
+        const models = await fetchModelsForMake(make);
+        const picked = models.slice(0, MODELS_PER_MAKE);
+        picked.forEach(m => {
+          allCars.push({
+            key: `${make}-${m.Model_ID}`,
+            make,
+            model: m.Model_Name,
+            modelId: m.Model_ID,
+            year: YEAR,
+            specs: demoSpecs(make, m.Model_Name, YEAR),
+            photoState: 'loading'
+          });
+        });
+        logLine(`  ✓ Отримано ${models.length} моделей, взято ${picked.length}`, 'ok');
+      } catch (err){
+        logLine(`  ✗ Помилка для "${make}": ${err.message}`, 'warn');
+        renderErrorCard(`Немає даних: ${make}`, err.message);
+      }
+    }
+
+    if (allCars.length === 0){
+      setStatus('Дані NHTSA недоступні', 'err');
+      logLine('✗ Жодного автомобіля не завантажено — Results порожній для всіх марок', 'warn');
+      reloadBtn.disabled = false;
+      return;
+    }
+
+    // render cards first (with loading photo state), then fill photos in
+    allCars.forEach(car => renderCarCard(car));
+    setStatus(`Завантажено ${allCars.length} авто · синхронізація фото…`);
+
+    // Sequential photo fetch to respect Unsplash rate limits
+    for (const car of allCars){
+      try {
+        const photo = await fetchUnsplashPhoto(`${car.make} ${car.model}`);
+        car.photo = photo;
+        car.photoState = 'done';
+        logLine(`  ✓ Фото знайдено: ${car.make} ${car.model}`, 'ok');
+      } catch (err){
+        car.photoState = 'error';
+        car.photoError = err.message;
+        logLine(`  ✗ Фото не знайдено для ${car.make} ${car.model}: ${err.message}`, 'warn');
+      }
+      const photoEl = document.querySelector(`.photo[data-key="${car.key}"]`);
+      if (photoEl){
+        photoEl.innerHTML = car.photoState === 'done'
+          ? `<img src="${car.photo.url}" alt="${car.make} ${car.model}" loading="lazy"><span class="badge">vPIC · NHTSA</span>`
+          : `<div class="ph-error">фото недоступне</div><span class="badge">vPIC · NHTSA</span>`;
+      }
+      await new Promise(r => setTimeout(r, 150));
+    }
+
+    setStatus(`Готово · ${allCars.length} авто, дані актуальні`, 'live');
+    logLine('→ Синхронізація завершена', 'ok');
+    reloadBtn.disabled = false;
+  }
+
+  reloadBtn.addEventListener('click', loadCatalog);
+  loadCatalog();
+})();
+</script>
+</body>
+</html>

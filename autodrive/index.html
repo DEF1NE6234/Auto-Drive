@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoDrive - Автосалон і сервісний центр</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+
+    <!-- Logo -->
+    <a href="#" class="logo" data-nav-home>
+      <span class="logo__name">AUTO<span>DRIVE</span></span>
+      <span class="logo__sub">Автосалон і сервісний центр</span>
+    </a>
+
+    <!-- Desktop Nav (1280px+) -->
+    <nav class="nav-desktop" aria-label="Головна навігація">
+      <a href="#" class="nav-link" data-nav-home>Головна</a>
+      <a href="#catalog" class="nav-link" data-nav-section="catalog">Каталог авто</a>
+      <a href="#services" class="nav-link" data-nav-section="services">Послуги</a>
+      <a href="#" class="nav-link">Тест-драйв</a>
+      <a href="#promotions" class="nav-link" data-nav-section="promotions">Акції</a>
+      <a href="#about" class="nav-link" data-nav-section="about">Про нас</a>
+      <a href="#contacts" class="nav-link" data-nav-section="contacts">Контакти</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone" href="tel:+380680627194">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" /></svg>
+        +38 (068) 062 71 94
+      </a>
+      <button class="btn-call" type="button">Замовити дзвінок</button>
+    </div>
+
+    <!-- Burger Button (tablet + mobile) -->
+    <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </header>
+
+  <!-- ===== HEADER PROMO BANNER (catalog page) ===== -->
+  <aside class="header-promo" id="headerPromo" aria-live="polite" hidden>
+    <div class="header-promo__inner">
+      <div class="header-promo__content">
+        <span class="header-promo__label">Акція</span>
+        <p class="header-promo__title" id="headerPromoTitle">Літнє обслуговування <strong>-20%</strong></p>
+        <p class="header-promo__text" id="headerPromoText">Підготуй свій автомобіль до нового сезону та отримай знижку на обслуговування</p>
+        <a class="header-promo__btn" href="#services" id="headerPromoLink">Детальніше</a>
+      </div>
+      <button class="header-promo__close" type="button" id="headerPromoClose" aria-label="Закрити акцію">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+    </div>
+    <div class="header-promo__progress" aria-hidden="true">
+      <span class="header-promo__progress-bar" id="headerPromoProgress"></span>
+    </div>
+  </aside>
+
+  <!-- ===== TABLET SLIDE-IN NAV (745px - 1279px) ===== -->
+  <nav class="nav-tablet" id="navTablet">
+    <button class="close-btn" id="closeTablet" aria-label="Закрити">&#10005;</button>
+    <a href="#" data-nav-home>Головна</a>
+    <a href="#catalog" data-nav-section="catalog">Каталог авто</a>
+    <a href="#services" data-nav-section="services">Послуги</a>
+    <a href="#">Тест-драйв</a>
+    <a href="#promotions" data-nav-section="promotions">Акції</a>
+    <a href="#about" data-nav-section="about">Про нас</a>
+    <a href="#contacts" data-nav-section="contacts">Контакти</a>
+    <button class="btn-call-nav" type="button">Замовити дзвінок</button>
+  </nav>
+
+  <!-- ===== MOBILE FULLSCREEN NAV (<=744px) ===== -->
+  <nav class="nav-mobile" id="navMobile">
+    <button class="close-btn" id="closeMobile" aria-label="Закрити">&#10005;</button>
+    <a href="#" data-nav-home>Головна</a>
+    <a href="#catalog" data-nav-section="catalog">Каталог авто</a>
+    <a href="#services" data-nav-section="services">Послуги</a>
+    <a href="#">Тест-драйв</a>
+    <a href="#promotions" data-nav-section="promotions">Акції</a>
+    <a href="#about" data-nav-section="about">Про нас</a>
+    <a href="#contacts" data-nav-section="contacts">Контакти</a>
+    <button class="btn-call-nav" type="button">Замовити дзвінок</button>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <main class="site-main" id="siteMain">
+  <section class="hero">
+    <div class="slider">
+      <div class="slide active" style="background-image: url('images/hero1.jpg')"></div>
+      <div class="slide" style="background-image: url('images/hero2.jpg')"></div>
+      <div class="slide" style="background-image: url('images/hero3.jpg')"></div>
+      <div class="slide" style="background-image: url('images/hero4.jpg')"></div>
+    </div>
+
+    <!-- Slider navigation arrows -->
+    <button class="slider-btn slider-btn--prev" id="sliderPrev" aria-label="Попереднє фото">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="slider-btn slider-btn--next" id="sliderNext" aria-label="Наступне фото">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <polyline points="9 18 15 12 9 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Slider dots -->
+    <div class="slider-dots" id="sliderDots"></div>
+
+    <!-- Text content -->
+    <div class="hero__content">
+      <h1 class="hero__title">
+        Твій ідеальний<br>
+        <span class="yellow">Автомобіль</span>
+        чекає на тебе
+      </h1>
+      <p class="hero__subtitle">
+        Широкий вибір авто, вигідні умови та<br>
+        професійний сервіс на кожному етапі
+      </p>
+      <div class="hero__buttons">
+        <button class="btn-catalog" type="button" data-scroll-to="catalog">Переглянути всі авто</button>
+        <button class="btn-testdrive">Запис на тест-драйв</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== CAR CATALOG ===== -->
+  <section class="catalog-section" id="catalog" aria-labelledby="catalogTitle">
+    <div class="catalog-panel">
+      <div class="catalog-top">
+        <div>
+          <h2 class="catalog-title" id="catalogTitle">КАТАЛОГ АВТО</h2>
+          <span class="catalog-title-line" aria-hidden="true"></span>
+        </div>
+        <button class="catalog-view-all" type="button" data-filter="all" data-open-catalog-page>Переглянути всі авто</button>
+      </div>
+
+      <div class="catalog-filters-wrapper">
+        <div class="catalog-filters" aria-label="Категорії авто">
+          <button class="catalog-filter active" type="button" data-filter="all">Всі авто</button>
+          <button class="catalog-filter" type="button" data-filter="new">Нові</button>
+          <button class="catalog-filter" type="button" data-filter="used">З пробігом</button>
+          <button class="catalog-filter" type="button" data-filter="premium">Преміум</button>
+          <button class="catalog-filter" type="button" data-filter="electric">Електроавтомобілі</button>
+        </div>
+      </div>
+
+      <div class="catalog-slider">
+        <button class="catalog-arrow catalog-arrow--prev" type="button" id="catalogPrev" aria-label="Попередні авто">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="catalog-viewport">
+          <div class="catalog-track" id="catalogTrack"></div>
+        </div>
+
+        <button class="catalog-arrow catalog-arrow--next" type="button" id="catalogNext" aria-label="Наступні авто">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <polyline points="9 18 15 12 9 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROMOTIONS ===== -->
+  <section class="promotions-section" id="promotions" aria-labelledby="promotionsTitle">
+      <div class="promotions-slider" aria-label="Акції сервісного центру">
+      <button class="promotion-collapse" type="button" id="promotionCollapse" aria-label="Згорнути акцію" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+      <article class="promotion-slide active">
+        <img class="promotion-image" src="images/hero1.jpg" alt="Жовтий Audi біля сучасної будівлі" />
+        <div class="promotion-content">
+          <p class="promotion-label">Акція</p>
+          <h2 class="promotion-title" id="promotionsTitle">Літнє обслуговування <span>-20%</span></h2>
+          <p class="promotion-text">Підготуй свій автомобіль до нового сезону та отримуйте знижку на обслуговування</p>
+          <div class="promotion-actions">
+            <button class="promotion-button" type="button" data-promo-detail="summer">Детальніше про акцію</button>
+            <div class="promotion-arrows" aria-label="Перемикання акцій">
+              <button class="promotion-arrow" type="button" id="promotionPrev" aria-label="Попередня акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6" /></svg>
+              </button>
+              <button class="promotion-arrow" type="button" id="promotionNext" aria-label="Наступна акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="promotion-slide">
+        <img class="promotion-image" src="images/hero2.jpg" alt="Седан Audi на дорозі" />
+        <div class="promotion-content">
+          <p class="promotion-label">Акція</p>
+          <h2 class="promotion-title">Діагностика перед подорожжю <span>-15%</span></h2>
+          <p class="promotion-text">Перевіримо основні системи авто перед дорогою та допоможемо уникнути неприємних сюрпризів</p>
+          <div class="promotion-actions">
+            <button class="promotion-button" type="button" data-promo-detail="diagnostics">Детальніше про акцію</button>
+            <div class="promotion-arrows" aria-label="Перемикання акцій">
+              <button class="promotion-arrow promotion-prev-clone" type="button" aria-label="Попередня акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6" /></svg>
+              </button>
+              <button class="promotion-arrow promotion-next-clone" type="button" aria-label="Наступна акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="promotion-slide">
+        <img class="promotion-image" src="images/hero3.jpg" alt="Білий Audi Q8 на міській вулиці" />
+        <div class="promotion-content">
+          <p class="promotion-label">Акція</p>
+          <h2 class="promotion-title">Комплект шин та балансування <span>-10%</span></h2>
+          <p class="promotion-text">Оновіть сезонний комплект шин і отримайте вигідну ціну на професійне балансування коліс</p>
+          <div class="promotion-actions">
+            <button class="promotion-button" type="button" data-promo-detail="tires">Детальніше про акцію</button>
+            <div class="promotion-arrows" aria-label="Перемикання акцій">
+              <button class="promotion-arrow promotion-prev-clone" type="button" aria-label="Попередня акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6" /></svg>
+              </button>
+              <button class="promotion-arrow promotion-next-clone" type="button" aria-label="Наступна акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="promotion-slide">
+        <img class="promotion-image" src="images/hero4.jpg" alt="Преміальний автомобіль у сервісному центрі" />
+        <div class="promotion-content">
+          <p class="promotion-label">Акція</p>
+          <h2 class="promotion-title">Trade-in із вигодою <span>до 80 000 грн</span></h2>
+          <p class="promotion-text">Приймаємо ваше авто в обмін на нове та фіксуємо персональну вигоду на покупку</p>
+          <div class="promotion-actions">
+            <button class="promotion-button" type="button" data-promo-detail="tradein">Детальніше про акцію</button>
+            <div class="promotion-arrows" aria-label="Перемикання акцій">
+              <button class="promotion-arrow promotion-prev-clone" type="button" aria-label="Попередня акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6" /></svg>
+              </button>
+              <button class="promotion-arrow promotion-next-clone" type="button" aria-label="Наступна акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="promotion-slide">
+        <img class="promotion-image" src="images/hero2.jpg" alt="Авто на швидкісній дорозі" />
+        <div class="promotion-content">
+          <p class="promotion-label">Акція</p>
+          <h2 class="promotion-title">Кредит на авто <span>від 0.01%</span></h2>
+          <p class="promotion-text">Підберемо комфортний платіж і швидко підготуємо рішення від партнерських банків</p>
+          <div class="promotion-actions">
+            <button class="promotion-button" type="button" data-promo-detail="credit">Детальніше про акцію</button>
+            <div class="promotion-arrows" aria-label="Перемикання акцій">
+              <button class="promotion-arrow promotion-prev-clone" type="button" aria-label="Попередня акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6" /></svg>
+              </button>
+              <button class="promotion-arrow promotion-next-clone" type="button" aria-label="Наступна акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="promotion-slide">
+        <img class="promotion-image" src="images/hero3.jpg" alt="Білий кросовер у місті" />
+        <div class="promotion-content">
+          <p class="promotion-label">Акція</p>
+          <h2 class="promotion-title">Подарунок до авто <span>страхування</span></h2>
+          <p class="promotion-text">Для обраних моделей даруємо пакет страхування або сервісний сертифікат</p>
+          <div class="promotion-actions">
+            <button class="promotion-button" type="button" data-promo-detail="insurance">Детальніше про акцію</button>
+            <div class="promotion-arrows" aria-label="Перемикання акцій">
+              <button class="promotion-arrow promotion-prev-clone" type="button" aria-label="Попередня акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6" /></svg>
+              </button>
+              <button class="promotion-arrow promotion-next-clone" type="button" aria-label="Наступна акція">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services-section" id="services" aria-labelledby="servicesTitle">
+    <div class="services-panel">
+      <div class="services-top">
+        <h2 class="services-title" id="servicesTitle">НАШІ ПОСЛУГИ</h2>
+        <span class="services-title-line" aria-hidden="true"></span>
+      </div>
+
+      <div class="services-slider">
+        <button class="services-arrow services-arrow--prev" type="button" id="servicesPrev" aria-label="Попередня послуга">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="services-viewport">
+          <div class="services-track" id="servicesTrack">
+            <article class="service-card">
+              <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" /><path d="M24 13v11l8 5" /><path d="M14 11l-3-3M34 11l3-3" /></svg>
+              <div>
+                <h3>Технічне обслуговування</h3>
+                <p>Комплексна діагностика та обслуговування вашого авто.</p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 30 30 14l4 4-16 16h-4v-4Z" /><path d="m29 15 4 4" /><path d="M12 37h24" /></svg>
+              <div>
+                <h3>Ремонт будь-якої складності</h3>
+                <p>Професійний ремонт двигуна, підвіски, гальмівної системи та інше.</p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="12" width="24" height="24" rx="5" /><path d="M18 21h12M18 27h12M18 33h7" /><path d="M18 8v4M30 8v4M18 36v4M30 36v4" /></svg>
+              <div>
+                <h3>Діагностика автомобіля</h3>
+                <p>Сучасне обладнання для точної діагностики всіх систем авто.</p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 29h28l-3-9a4 4 0 0 0-4-3H17a4 4 0 0 0-4 3l-3 9Z" /><path d="M14 29v6M34 29v6M17 35h14" /><circle cx="17" cy="30" r="3" /><circle cx="31" cy="30" r="3" /></svg>
+              <div>
+                <h3>Допомога на дорозі 24/7</h3>
+                <p>Оперативна технічна допомога на дорозі у будь-який час доби.</p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8 12 14v9c0 8 5 14 12 17 7-3 12-9 12-17v-9L24 8Z" /><path d="m18 24 4 4 8-9" /></svg>
+              <div>
+                <h3>Гарантія на роботи та запчастини</h3>
+                <p>Надаємо гарантію на всі види робіт та встановлені запчастини.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <button class="services-arrow services-arrow--next" type="button" id="servicesNext" aria-label="Наступна послуга">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <polyline points="9 18 15 12 9 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="services-dots" id="servicesDots" aria-label="Навігація послуг"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT + CONTACTS ===== -->
+  <section class="about-section" id="about" aria-labelledby="aboutTitle">
+    <div class="about-panel">
+      <div class="about-grid">
+        <div class="about-media">
+          <h2 class="section-title section-title--dark" id="aboutTitle">Чому обирають нас?</h2>
+          <span class="short-title-line" aria-hidden="true"></span>
+          <img class="about-image" src="images/const_1.jpg" alt="Сучасний автосалон AutoDrive" />
+        </div>
+
+        <div class="about-benefits" aria-label="Переваги AutoDrive">
+          <article class="benefit-item">
+            <svg class="benefit-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" /><path d="M24 14v10l7 5" /><path d="M15 36h18" /></svg>
+            <div>
+              <h3>Понад 10 років на ринку</h3>
+              <p>Досвід та довіра тисяч клієнтів</p>
+            </div>
+          </article>
+          <article class="benefit-item">
+            <svg class="benefit-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M9 28h30l-4-10H13l-4 10Z" /><path d="M14 28v7M34 28v7M17 35h14" /><circle cx="17" cy="29" r="3" /><circle cx="31" cy="29" r="3" /></svg>
+            <div>
+              <h3>Широкий вибір авто</h3>
+              <p>Нові та авто з пробігом на будь-який смак</p>
+            </div>
+          </article>
+          <article class="benefit-item">
+            <svg class="benefit-icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="11" width="24" height="28" rx="4" /><path d="M18 20h12M18 26h12M18 32h7" /><path d="M31 33h5" /></svg>
+            <div>
+              <h3>Вигідні умови кредитування</h3>
+              <p>Індивідуальний підхід та найкращі ставки</p>
+            </div>
+          </article>
+          <article class="benefit-item">
+            <svg class="benefit-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="18" r="6" /><path d="M13 39a11 11 0 0 1 22 0" /><path d="m34 15 3 3 5-6" /></svg>
+            <div>
+              <h3>Професійна команда</h3>
+              <p>Фахівці, які люблять свою справу</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="contact-card" id="contacts" aria-labelledby="contactsTitle">
+        <div class="contact-info">
+          <h2 class="section-title section-title--light" id="contactsTitle">Зв'яжіться з нами</h2>
+          <ul class="contact-list">
+            <li>
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 10c0 5-8 11-8 11s-8-6-8-11a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>м. Київ, вул. Автомобільна, 24<br><small>(Біля ТРЦ AutoMall)</small></span>
+            </li>
+            <li>
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" />
+              </svg>
+              <a href="tel:+380680627194">+38 (068) 062 71 94</a>
+            </li>
+            <li>
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3 7 9 6 9-6" />
+              </svg>
+              <a href="mailto:info@autodrive.ua">info@autodrive.ua</a>
+            </li>
+            <li>
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+              <span>Пн-Пт: 09:00 - 19:00<br>Сб-Нд: 10:00 - 17:00</span>
+            </li>
+          </ul>
+        </div>
+
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D1%96%D0%BB%D1%8C%D0%BD%D0%B0%2024%2C%20%D0%9A%D0%B8%D1%97%D0%B2" target="_blank" rel="noopener" aria-label="Відкрити адресу в Google Maps">
+          <div class="map-art" aria-hidden="true">
+            <svg viewBox="0 0 360 260" preserveAspectRatio="none">
+              <path d="M0 42 92 20 163 58 240 34 360 60M0 122l82-28 110 42 74-48 94 20M12 235l80-73 102 30 66-44 100 22" />
+              <path d="M40 0 72 260M132 0l-8 260M212 0l26 260M310 0 282 260M0 184l360-130M0 82l360 116" />
+              <circle cx="225" cy="138" r="4" />
+            </svg>
+            <span class="map-pin">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 22s7-6.1 7-13A7 7 0 1 0 5 9c0 6.9 7 13 7 13Z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <div class="about-svg-copies" aria-label="SVG копії іконок сервісу">
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="18" />
+            <path d="M24 13v11l7 5" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M10 28h28l-3-9a4 4 0 0 0-4-3H17a4 4 0 0 0-4 3l-3 9Z" />
+            <path d="M13 28v7M35 28v7M16 35h16" />
+            <circle cx="17" cy="30" r="3" />
+            <circle cx="31" cy="30" r="3" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="12" y="13" width="24" height="24" rx="4" />
+            <path d="M18 21h12M18 27h12M18 33h7" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M16 31 31 16" />
+            <path d="m28 13 7 7-4 4-7-7 4-4Z" />
+            <path d="M14 34h20" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M13 32h22a5 5 0 0 0 0-10h-2a9 9 0 0 0-17-3" />
+            <path d="M18 28h9M18 34h9" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 8 12 14v9c0 8 5 14 12 17 7-3 12-9 12-17v-9L24 8Z" />
+            <path d="m18 24 4 4 8-9" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M9 26h30l-4-9H13l-4 9Z" />
+            <path d="M14 26v7M34 26v7M17 33h14" />
+            <path d="M17 17v-4h14v4" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="12" y="12" width="24" height="24" rx="4" />
+            <path d="M18 20h12M18 26h12M18 32h7" />
+            <path d="M31 32h5" />
+          </svg>
+        </span>
+        <span class="svg-copy">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="18" r="6" />
+            <path d="M13 38a11 11 0 0 1 22 0" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- ===== FULL CATALOG PAGE ===== -->
+  <section class="catalog-full" id="catalogFull" aria-labelledby="catalogFullTitle" hidden>
+    <div class="catalog-full__hero">
+      <div class="catalog-full__intro">
+        <nav class="catalog-breadcrumbs" aria-label="Шлях сторінки">
+          <a href="#" data-catalog-home>Головна</a>
+          <span aria-hidden="true">></span>
+          <span>Каталог авто</span>
+        </nav>
+        <h1 id="catalogFullTitle">КАТАЛОГ АВТО</h1>
+        <p>Знайдіть свій ідеальний автомобіль серед <strong id="catalogHeroCount">250+</strong> перевірених варіантів</p>
+      </div>
+
+      <aside class="catalog-ad-mini" id="catalogAdMini" aria-live="polite">
+        <div>
+          <h2 id="catalogAdTitle">Потрібна допомога у виборі авто?</h2>
+          <p id="catalogAdText">Наші експерти підберуть найкращий варіант саме для вас</p>
+          <button class="btn-ghost" type="button">Отримати консультацію</button>
+        </div>
+        <img id="catalogAdImage" src="images/hero2.jpg" alt="" aria-hidden="true" />
+      </aside>
+    </div>
+
+    <div class="catalog-search-panel">
+      <div class="catalog-search-tabs" role="tablist" aria-label="Тип пошуку">
+        <button class="catalog-search-tab active" type="button" data-search-tab="basic" role="tab" aria-selected="true">Пошук авто</button>
+        <button class="catalog-search-tab" type="button" data-search-tab="advanced" role="tab" aria-selected="false">Розширений пошук</button>
+        <span class="catalog-search-tabs__line" aria-hidden="true"></span>
+      </div>
+
+      <form class="catalog-search-grid" id="catalogSearchForm">
+        <label class="catalog-field">
+          <span>Марка</span>
+          <select id="topBrandFilter">
+            <option value="all">Всі марки</option>
+          </select>
+        </label>
+        <label class="catalog-field">
+          <span>Модель</span>
+          <select id="topModelFilter">
+            <option value="all">Всі моделі</option>
+          </select>
+        </label>
+        <fieldset class="catalog-range-field">
+          <legend>Рік випуску</legend>
+          <input id="topYearFrom" type="number" min="2015" max="2026" placeholder="Від" />
+          <span>-</span>
+          <input id="topYearTo" type="number" min="2015" max="2026" placeholder="До" />
+        </fieldset>
+        <fieldset class="catalog-range-field">
+          <legend>Ціна, грн</legend>
+          <input id="topPriceFrom" type="number" min="300000" max="5000000" placeholder="Від" />
+          <span>-</span>
+          <input id="topPriceTo" type="number" min="300000" max="5000000" placeholder="До" />
+        </fieldset>
+        <label class="catalog-field">
+          <span>Тип палива</span>
+          <select id="topFuelFilter">
+            <option value="all">Всі типи</option>
+          </select>
+        </label>
+        <label class="catalog-field">
+          <span>Коробка передач</span>
+          <select id="topGearboxFilter">
+            <option value="all">Всі типи</option>
+          </select>
+        </label>
+        <label class="catalog-field">
+          <span>Привід</span>
+          <select id="topDriveFilter">
+            <option value="all">Всі типи</option>
+          </select>
+        </label>
+        <fieldset class="catalog-range-field">
+          <legend>Пробіг, км</legend>
+          <input id="topMileageFrom" type="number" min="0" max="200000" placeholder="Від" />
+          <span>-</span>
+          <input id="topMileageTo" type="number" min="0" max="200000" placeholder="До" />
+        </fieldset>
+        <button class="catalog-show-btn" type="submit" id="catalogShowBtn">Показати 250 авто</button>
+      </form>
+    </div>
+
+    <div class="catalog-layout">
+      <aside class="catalog-sidebar" aria-label="Фільтри каталогу">
+        <p class="catalog-found">Знайдено: <span id="catalogFoundSide">250 авто</span></p>
+
+        <section class="side-filter open">
+          <button class="side-filter__head" type="button" aria-expanded="true">Ціна <span></span></button>
+          <div class="side-filter__body">
+            <div class="side-inputs">
+              <input id="sidePriceFrom" type="number" min="300000" max="5000000" value="300000" aria-label="Ціна від" />
+              <input id="sidePriceTo" type="number" min="300000" max="5000000" value="5000000" aria-label="Ціна до" />
+            </div>
+            <div class="range-pair">
+              <input id="priceRangeMin" type="range" min="300000" max="5000000" step="50000" value="300000" aria-label="Мінімальна ціна" />
+              <input id="priceRangeMax" type="range" min="300000" max="5000000" step="50000" value="5000000" aria-label="Максимальна ціна" />
+            </div>
+            <div class="range-labels"><span>300 000 грн</span><span>5 000 000 грн</span></div>
+          </div>
+        </section>
+
+        <section class="side-filter open">
+          <button class="side-filter__head" type="button" aria-expanded="true">Марка <span></span></button>
+          <div class="side-filter__body">
+            <label class="brand-search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m16 16 4 4" /></svg>
+              <input id="brandSearch" type="search" placeholder="Пошук марки" />
+            </label>
+            <div class="check-list check-list--limited" id="brandCheckList"></div>
+            <button class="show-more-brands" type="button" id="showMoreBrands">Показати ще</button>
+          </div>
+        </section>
+
+        <section class="side-filter open">
+          <button class="side-filter__head" type="button" aria-expanded="true">Тип палива <span></span></button>
+          <div class="side-filter__body">
+            <div class="check-list" id="fuelCheckList"></div>
+          </div>
+        </section>
+
+        <section class="side-filter open">
+          <button class="side-filter__head" type="button" aria-expanded="true">Рік випуску <span></span></button>
+          <div class="side-filter__body">
+            <div class="side-inputs">
+              <input id="sideYearFrom" type="number" min="2015" max="2026" value="2015" aria-label="Рік від" />
+              <input id="sideYearTo" type="number" min="2015" max="2026" value="2026" aria-label="Рік до" />
+            </div>
+            <div class="range-pair">
+              <input id="yearRangeMin" type="range" min="2015" max="2026" value="2015" aria-label="Мінімальний рік" />
+              <input id="yearRangeMax" type="range" min="2015" max="2026" value="2026" aria-label="Максимальний рік" />
+            </div>
+            <div class="range-labels"><span>2015</span><span>2026</span></div>
+          </div>
+        </section>
+
+        <section class="side-filter open">
+          <button class="side-filter__head" type="button" aria-expanded="true">Пробіг <span></span></button>
+          <div class="side-filter__body">
+            <div class="side-inputs">
+              <input id="sideMileageFrom" type="number" min="0" max="200000" value="0" aria-label="Пробіг від" />
+              <input id="sideMileageTo" type="number" min="0" max="200000" value="200000" aria-label="Пробіг до" />
+            </div>
+            <div class="range-pair">
+              <input id="mileageRangeMin" type="range" min="0" max="200000" step="5000" value="0" aria-label="Мінімальний пробіг" />
+              <input id="mileageRangeMax" type="range" min="0" max="200000" step="5000" value="200000" aria-label="Максимальний пробіг" />
+            </div>
+            <div class="range-labels"><span>0 км</span><span>200 000 км</span></div>
+          </div>
+        </section>
+
+        <button class="catalog-reset-btn" type="button" id="catalogResetBtn">Скинути всі фільтри</button>
+      </aside>
+
+      <main class="catalog-results" aria-live="polite">
+        <div class="catalog-toolbar">
+          <p class="catalog-toolbar__found">Знайдено: <span id="catalogFoundTop">250 авто</span></p>
+          <label class="catalog-sort">
+            <span>Сортування:</span>
+            <select id="catalogSort">
+              <option value="newest">Спочатку нові</option>
+              <option value="priceAsc">Спочатку дешевші</option>
+              <option value="priceDesc">Спочатку дорожчі</option>
+              <option value="electric">Спочатку електро</option>
+              <option value="mileageAsc">Найменший пробіг</option>
+            </select>
+          </label>
+
+          <div class="view-switch" aria-label="Тип відображення">
+            <button class="view-btn active" type="button" data-view="3" aria-label="Сітка 3 на 3">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" /></svg>
+            </button>
+            <button class="view-btn" type="button" data-view="2" aria-label="Сітка 2 на 2">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" /></svg>
+            </button>
+            <button class="view-btn" type="button" data-view="1" aria-label="Список">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14" /></svg>
+            </button>
+          </div>
+
+          <button class="compare-btn" type="button" id="compareBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h11M8 12h8M8 17h11M4 7h.01M4 12h.01M4 17h.01" /></svg>
+            Порівняння (<span id="compareCount">0</span>)
+          </button>
+
+          <button class="favorites-btn" type="button" id="favoritesOnlyBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+            Обрані (<span id="favoritesCount">0</span>)
+          </button>
+        </div>
+
+        <div class="compare-panel" id="comparePanel" hidden>
+          <strong>Порівняння авто</strong>
+          <p id="compareText">Додайте 2-3 авто до порівняння, щоб швидко побачити різницю у ціні, пробігу та характеристиках.</p>
+        </div>
+
+        <div class="catalog-cards-grid view-3" id="catalogCardsGrid"></div>
+        <nav class="catalog-pagination" id="catalogPagination" aria-label="Сторінки каталогу"></nav>
+      </main>
+    </div>
+
+    <section class="catalog-features" aria-label="Переваги AutoDrive">
+      <div class="catalog-features__inner">
+        <article class="catalog-feature">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8 12 14v9c0 8 5 14 12 17 7-3 12-9 12-17v-9L24 8Z" /><path d="m18 24 4 4 8-9" /></svg>
+          <div>
+            <h2>Перевірені авто</h2>
+            <p>Кожен автомобіль проходить технічну перевірку</p>
+          </div>
+        </article>
+        <article class="catalog-feature">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" /><path d="M24 13v11l8 5" /></svg>
+          <div>
+            <h2>Гарантія якості</h2>
+            <p>Офіційна гарантія на всі авто</p>
+          </div>
+        </article>
+        <article class="catalog-feature">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="11" width="24" height="28" rx="4" /><path d="M18 20h12M18 26h12M18 32h7" /></svg>
+          <div>
+            <h2>Вигідні умови</h2>
+            <p>Кредитування та trade-in</p>
+          </div>
+        </article>
+        <article class="catalog-feature">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 28h30l-4-10H13l-4 10Z" /><path d="M14 28v7M34 28v7M17 35h14" /><circle cx="17" cy="29" r="3" /><circle cx="31" cy="29" r="3" /></svg>
+          <div>
+            <h2>Trade-in</h2>
+            <p>Обмін вашого авто на нове</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo" data-nav-home>
+          <span class="footer-logo__name">AUTO<span>DRIVE</span></span>
+          <span class="footer-logo__sub">Автосалон і сервісний центр</span>
+        </a>
+        <div class="social-links" aria-label="Соціальні мережі">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 8h-2a1 1 0 0 0-1 1v3h3l-.5 3H12v7H9v-7H7v-3h2V9a4 4 0 0 1 4-4h2v3Z" /></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" /><circle cx="12" cy="12" r="3.5" /><circle cx="17" cy="7" r="1" /></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12s0-3.4-.4-5a2.7 2.7 0 0 0-1.9-1.9C18.1 4.7 12 4.7 12 4.7s-6.1 0-7.7.4A2.7 2.7 0 0 0 2.4 7C2 8.6 2 12 2 12s0 3.4.4 5a2.7 2.7 0 0 0 1.9 1.9c1.6.4 7.7.4 7.7.4s6.1 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9c.4-1.6.4-5 .4-5Z" /><path d="m10 15 5-3-5-3v6Z" /></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-columns" aria-label="Посилання сайту">
+        <div class="footer-group">
+          <button class="footer-group__toggle" type="button" aria-expanded="false">Навігація</button>
+          <div class="footer-group__links">
+            <a href="#" data-nav-home>Головна</a>
+            <a href="#catalog" data-nav-section="catalog">Каталог авто</a>
+            <a href="#services" data-nav-section="services">Послуги</a>
+            <a href="#">Тест-драйв</a>
+          </div>
+        </div>
+        <div class="footer-group">
+          <button class="footer-group__toggle" type="button" aria-expanded="false">Компанія</button>
+          <div class="footer-group__links">
+            <a href="#about" data-nav-section="about">Про нас</a>
+            <a href="#promotions" data-nav-section="promotions">Акції</a>
+            <a href="#">Новини</a>
+            <a href="#contacts" data-nav-section="contacts">Контакти</a>
+          </div>
+        </div>
+        <div class="footer-group">
+          <button class="footer-group__toggle" type="button" aria-expanded="false">Послуги</button>
+          <div class="footer-group__links">
+            <a href="#services" data-nav-section="services">Технічне обслуговування</a>
+            <a href="#services" data-nav-section="services">Ремонт</a>
+            <a href="#services" data-nav-section="services">Діагностика</a>
+            <a href="#services" data-nav-section="services">Допомога на дорозі</a>
+          </div>
+        </div>
+      </div>
+
+      <form class="newsletter-form">
+        <label for="newsletterEmail">Підписуйтесь на новини</label>
+        <p>Отримуйте найкращі пропозиції та новини першими</p>
+        <div class="newsletter-field">
+          <input id="newsletterEmail" type="email" placeholder="Ваш Gmail" autocomplete="email" />
+          <button type="submit" aria-label="Підписатися">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </footer>
+
+  <script src="js/catalog-data.js"></script>
+  <div class="site-modal" id="callbackModal" aria-hidden="true">
+    <div class="site-modal__dialog site-modal__dialog--form" role="dialog" aria-modal="true" aria-labelledby="callbackTitle">
+      <button class="site-modal__close" type="button" data-close-modal aria-label="Закрити">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+      <p class="site-modal__eyebrow">AutoDrive</p>
+      <h2 id="callbackTitle">Замовити дзвінок</h2>
+      <p class="site-modal__lead">Залиште коротку анкету, і менеджер зв'яжеться з вами, щоб спокійно обговорити авто, бюджет і зручний час.</p>
+      <form class="callback-form" id="callbackForm">
+        <label>Ім'я<input name="firstName" type="text" placeholder="Ваше ім'я" required /></label>
+        <label>Прізвище<input name="lastName" type="text" placeholder="Ваше прізвище" required /></label>
+        <label>Телефон<input name="phone" type="tel" placeholder="+38 (0__) ___ __ __" required /></label>
+        <label>Що цікавить?<select name="interest"><option>Підбір авто</option><option>Тест-драйв</option><option>Trade-in</option><option>Сервіс</option></select></label>
+        <label class="callback-form__wide">Коментар<textarea name="message" rows="3" placeholder="Наприклад: хочу кросовер до 2 млн грн"></textarea></label>
+        <button class="callback-form__submit" type="submit">Надіслати анкету</button>
+      </form>
+      <p class="modal-result" id="callbackResult" hidden></p>
+    </div>
+  </div>
+
+  <div class="site-modal" id="promoDetailModal" aria-hidden="true">
+    <div class="site-modal__dialog site-modal__dialog--promo" role="dialog" aria-modal="true" aria-labelledby="promoDetailTitle">
+      <button class="site-modal__close" type="button" data-close-modal aria-label="Закрити">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+      <div class="promo-detail__image" id="promoDetailImage" aria-hidden="true"></div>
+      <div class="promo-detail__content">
+        <p class="site-modal__eyebrow">Деталі акції</p>
+        <h2 id="promoDetailTitle">Літнє обслуговування -20%</h2>
+        <p id="promoDetailText">Підготуйте авто до сезону з професійною перевіркою основних систем.</p>
+        <ul id="promoDetailList"></ul>
+        <button class="promo-detail__cta btn-call-trigger" type="button">Замовити консультацію</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-toast" id="siteToast" aria-live="polite" hidden></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
